@@ -1,0 +1,13 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Productivity",
+      "description": "Skills for everyday tasks, organization, communication, and working more effectively with AI agents.",
+      "skills": [
+        "commit"
+      ]
+    }
+  ]
+}
