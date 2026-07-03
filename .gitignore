@@ -1,2 +1,6 @@
 node_modules
 TODO.md
+.agents
+.claude
+.codex
+skills-lock.json
