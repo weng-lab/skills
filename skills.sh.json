@@ -10,6 +10,14 @@
       ]
     },
     {
+      "title": "Writing",
+      "description": "Skills for writing clear human-facing prose and reliable instructions for AI agents.",
+      "skills": [
+        "artifactor",
+        "unslop"
+      ]
+    },
+    {
       "title": "Web Development",
       "description": "Skills for building, reviewing, and improving web applications and user interfaces.",
       "skills": [
