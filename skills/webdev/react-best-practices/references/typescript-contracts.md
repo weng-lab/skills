@@ -16,15 +16,17 @@ Prefer typing a component's props parameter directly. `React.FC` is acceptable w
 - Prefer narrowing to assertions; treat `as any` as a defect unless an unavoidable boundary explains it.
 
 ```tsx
-// Wrong: optional flags permit contradictory combinations like loading + error + data
+// For a view that shows exactly one of loading, error, or data:
 type Props = { isLoading?: boolean; error?: Error; data?: User };
 
-// Right: a discriminated union rejects the impossible combinations
+// Encode those mutually exclusive states explicitly.
 type Props =
   | { status: 'loading' }
   | { status: 'error'; error: Error }
   | { status: 'success'; data: User };
 ```
+
+Model the actual lifecycle: stale data may legitimately coexist with refreshing or a refresh error. Do not force that UI into a mutually exclusive union that discards useful data.
 
 ## Reuse React Types
 

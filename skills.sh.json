@@ -20,7 +20,7 @@
       "title": "Web Development",
       "description": "Skills for building, reviewing, and improving web applications and user interfaces.",
       "skills": [
-        "react-code-quality",
+        "react-best-practices",
         "react-doctor",
         "vercel-react-best-practices"
       ]
