@@ -9,7 +9,7 @@ Decide in this order:
 3. Use a ref when a value must persist but should not trigger rendering.
 4. Share a value outside the component only when component instances should share it.
 
-Do not store a derived value and synchronize it with an Effect. Store stable identity, such as an item ID, rather than a copy of changing source data. Use memoization only for measured performance work, never correctness.
+Do not store a derived value and synchronize it with an Effect. Store stable identity, such as an item ID, rather than a copy of changing source data. Memoization is an optional performance tool; derived values must remain correct without it. See [React performance](react-performance.md) before adding optimization complexity.
 
 ```tsx
 // Wrong: redundant state that renders stale for one paint after first/last change
@@ -27,7 +27,15 @@ const fullName = `${first} ${last}`;
 - Try composition before adding Context solely to avoid prop forwarding.
 - Ask whether two mounted copies should share the interaction. If not, the state is instance-local.
 
-A value must be fully controlled by its parent or owned locally. Do not copy an ordinary prop into state. Name intentional capture-once props `initial*` or `default*`. When an uncontrolled subtree's identity changes, reset it with `key`, not an Effect.
+A value must be fully controlled by its parent or owned locally. Do not copy an ordinary prop into state. Name intentional capture-once props `initial*` or `default*`. When an uncontrolled subtree's identity changes and its entire local state should reset, use `key` rather than a reset Effect. A key remounts the subtree, so do not use it to refresh one value while preserving focus or other drafts.
+
+```tsx
+// The same record keeps its draft across parent renders.
+// A different record intentionally starts a new editing session.
+<NoteEditor key={note.id} defaultText={note.text} />
+```
+
+Here `defaultText` seeds local state once; later updates to the same note do not overwrite the draft. If external edits must be reflected immediately, make the text controlled instead. Choose that behavior from the editing requirements, not as a performance optimization.
 
 ## Apply the Effect Boundary
 
@@ -37,7 +45,7 @@ An Effect synchronizes React with an external system: a browser API, timer, netw
 - Work caused by an interaction belongs in that event handler.
 - Keep all consequences of one interaction together.
 - Do not use state as an intermediary trigger for an Effect.
-- Do not notify a parent or pass data upward through an Effect; change ownership or call the callback in the handler.
+- Do not mirror local React state upward through an Effect; change ownership or notify in the originating handler. A callback reporting a real external-system event can belong in that system's subscription.
 
 Common replacements:
 
