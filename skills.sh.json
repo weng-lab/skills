@@ -11,9 +11,8 @@
     },
     {
       "title": "Writing",
-      "description": "Skills for writing clear human-facing prose and reliable instructions for AI agents.",
+      "description": "Skills for writing and revising clear prose.",
       "skills": [
-        "artifactor",
         "unslop"
       ]
     },
