@@ -22,9 +22,7 @@
       "skills": [
         "react-code-quality",
         "react-doctor",
-        "vercel-composition-patterns",
-        "vercel-react-best-practices",
-        "vercel-react-view-transitions"
+        "vercel-react-best-practices"
       ]
     }
   ]
