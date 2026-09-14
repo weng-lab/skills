@@ -4,3 +4,4 @@ TODO.md
 .claude
 .codex
 skills-lock.json
+__pycache__/

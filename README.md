@@ -1,81 +1,104 @@
 # Weng Lab Agent Skills
 
 [![skills.sh](https://skills.sh/b/weng-lab/skills)](https://skills.sh/weng-lab/skills)
+[![Validate skills](https://github.com/weng-lab/skills/actions/workflows/validate-skills.yml/badge.svg)](https://github.com/weng-lab/skills/actions/workflows/validate-skills.yml)
 
-Reusable AI agent skills for Weng Lab bioinformatics, web development, writing, productivity, and lab workflows.
+Reusable agent skills for Weng Lab's development and writing workflows. Browse the skills below, choose the ones that fit your work, and install them into your coding agent.
 
-These skills can be installed into supported AI coding agents with the [`skills` CLI](https://www.skills.sh/docs), including OpenCode, Claude Code, Cursor, Codex, Gemini, and others.
+[Browse on skills.sh](https://skills.sh/weng-lab/skills) · [Contribute a skill](CONTRIBUTING.md) · [Maintainer guide](docs/maintaining.md)
 
-## Install Skills
+## Quick start
 
-List the skills available in this repo:
-
-```bash
-npx skills add weng-lab/skills --list
-```
-
-Install skills interactively:
+Run this from the project where you want to use the skills, then select skills and agents interactively:
 
 ```bash
-npx skills add weng-lab/skills
+npx skills@latest add weng-lab/skills
 ```
 
-Install one skill by name:
+Preview the available skills without installing:
 
 ```bash
-npx skills add weng-lab/skills --skill commit
+npx skills@latest add weng-lab/skills --list
 ```
 
-Install skills globally for your user account:
+Requires Node.js 22.20 or newer. The CLI supports Claude Code, Cursor, Codex, OpenCode, Gemini CLI, and [other agents](https://github.com/vercel-labs/skills#supported-agents).
+
+## Web Development
+
+| Skill | When to choose it |
+| --- | --- |
+| [react-best-practices](skills/webdev/react-best-practices/SKILL.md) | Weng Lab's general React/TypeScript guidance: state, effects, component design, composition, and React/Next.js performance. Start here for everyday React work. |
+| [react-doctor](skills/webdev/react-doctor/SKILL.md) | Run React Doctor and interpret its diagnostics, scan scope, and configuration. Requires React Doctor installed in the target project. |
+| [vercel-react-best-practices](skills/webdev/vercel-react-best-practices/SKILL.md) | The bundled Vercel performance rulebook for React and Next.js. Choose this for its detailed optimization references; it overlaps with the general React skill. |
 
 ```bash
-npx skills add weng-lab/skills --global
+npx skills@latest add weng-lab/skills --skill react-best-practices
 ```
 
-Install skills for a specific agent:
+## Productivity
+
+| Skill | When to choose it |
+| --- | --- |
+| [commit](skills/productivity/commit/SKILL.md) | Inspect and commit changes when you explicitly ask the agent to create a Git commit. |
 
 ```bash
-npx skills add weng-lab/skills --agent opencode
+npx skills@latest add weng-lab/skills --skill commit
 ```
 
-## Update Installed Skills
+## Writing
 
-Use `npx skills update` to update skills you previously downloaded with `npx skills add`.
-
-The CLI can update skills installed in your current project, skills installed globally in your agent config folder, or both. It will guide you through those choices interactively.
+| Skill | When to choose it |
+| --- | --- |
+| [unslop](skills/writing/unslop/SKILL.md) | Write and revise documentation, messages, PR descriptions, and other prose with a natural voice. |
 
 ```bash
-npx skills update
+npx skills@latest add weng-lab/skills --skill unslop
 ```
 
-You can also update one skill by name:
+## Installation options
+
+Install multiple skills for a specific agent:
 
 ```bash
-npx skills update commit
+npx skills@latest add weng-lab/skills --skill commit unslop --agent claude-code
 ```
 
-## Use a Skill Without Installing
-
-Run a skill ad hoc:
+Add `--global` to make a skill available across projects:
 
 ```bash
-npx skills use weng-lab/skills --skill commit
+npx skills@latest add weng-lab/skills --skill commit --global
 ```
 
-## Add a Skill
+## Manage installed skills
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the short checklist.
+```bash
+npx skills@latest list
+npx skills@latest update --project
+npx skills@latest update --global
+npx skills@latest update commit
+npx skills@latest remove commit
+```
 
-In brief: add your skill under the best category, keep its files together, and add the skill name to `skills.sh.json`.
+`update` refreshes the skills installed in your agent. `@latest` selects the latest CLI; the repository's pinned development CLI is upgraded separately.
 
-## About `skills.sh.json`
+## Try a skill without installing
 
-`skills.sh.json` controls how this repo is grouped on [skills.sh](https://www.skills.sh/). It does not make skills installable; installable skills come from valid `SKILL.md` files under `skills/`.
+Generate a prompt to use with your agent:
 
-Only include a group in `skills.sh.json` after it has at least one real skill.
+```bash
+npx skills@latest use weng-lab/skills --skill commit
+```
 
-## Links
+This prints a prompt and stages the skill in a temporary directory. To launch a supported agent with it, add an agent option, for example `--agent claude-code`.
 
-- [skills.sh documentation](https://www.skills.sh/docs)
-- [skills CLI](https://github.com/vercel-labs/skills)
-- [Agent Skills specification](https://agentskills.io)
+## Repository layout
+
+Source skills live in `skills/<category>/<skill-name>/`. Each skill includes its own `SKILL.md` and supporting resources. The catalog above lists all current skills; bioinformatics is a reserved category with no published skills yet.
+
+[skills.sh.json](skills.sh.json) defines the sections on our skills.sh page. The directory structure controls source organization; valid `SKILL.md` files make skills discoverable. CI checks skill format, references, CLI discovery, and complete grouping coverage.
+
+See the [maintainer guide](docs/maintaining.md) for listing refreshes, retired skills, CLI upgrades, and attribution follow-ups.
+
+## License
+
+Original contributions are licensed under the [MIT License](LICENSE). Third-party material retains its existing licenses and attribution; see the [provenance notes](docs/maintaining.md#attribution-and-licensing).
