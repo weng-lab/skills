@@ -3,8 +3,17 @@
   "notGrouped": "bottom",
   "groupings": [
     {
+      "title": "Web Development",
+      "description": "Skills for React and Next.js development, performance, and React Doctor diagnostics.",
+      "skills": [
+        "react-best-practices",
+        "react-doctor",
+        "vercel-react-best-practices"
+      ]
+    },
+    {
       "title": "Productivity",
-      "description": "Skills for everyday tasks, organization, communication, and working more effectively with AI agents.",
+      "description": "Skills for reviewing changes and creating Git commits.",
       "skills": [
         "commit"
       ]
@@ -14,15 +23,6 @@
       "description": "Skills for writing and revising clear prose.",
       "skills": [
         "unslop"
-      ]
-    },
-    {
-      "title": "Web Development",
-      "description": "Skills for building, reviewing, and improving web applications and user interfaces.",
-      "skills": [
-        "react-best-practices",
-        "react-doctor",
-        "vercel-react-best-practices"
       ]
     }
   ]

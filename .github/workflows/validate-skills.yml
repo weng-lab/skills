@@ -22,4 +22,4 @@ jobs:
           python-version: '3.12'
           enable-cache: false
       - run: npm ci
-      - run: uv run scripts/validate-skills.py
+      - run: npm run validate

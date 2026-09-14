@@ -3,6 +3,7 @@
 # dependencies = ["skills-ref==0.1.1", "markdown-it-py==3.0.0"]
 # ///
 """Validate source skills and compare them with the installed Skills CLI's list."""
+import json
 import os
 from pathlib import Path
 import re
@@ -10,6 +11,7 @@ import subprocess
 import sys
 from urllib.parse import unquote, urlsplit
 
+from catalog import grouping_errors
 from markdown_it import MarkdownIt
 from skills_ref import read_properties, validate
 from skills_ref.errors import SkillError
@@ -58,7 +60,7 @@ def discovery_errors(names):
     output = re.sub(r"\x1b\[[0-?]*[ -/]*[@-~]", "", result.stdout)
     if result.returncode:
         return [f"CLI discovery failed:\n{output}\n{result.stderr}"]
-    # The CLI has no JSON list option. Read only the skill-name rows in its
+    # The CLI does not allow --json with --list. Read only the skill-name rows in its
     # Available Skills section, not descriptions that might mention a name.
     section = output.partition("Available Skills")[2].partition("Use --skill")[0]
     discovered = re.findall(r"^│    (\S+)\s*$", section, re.MULTILINE)
@@ -87,6 +89,11 @@ def main():
             errors.append(f"{label}: duplicate skill name {name!r} (also {names[name]})")
         names[name] = label
         errors.extend(reference_errors(skill))
+    try:
+        config = json.loads((ROOT / "skills.sh.json").read_text())
+        errors.extend(grouping_errors(config, names))
+    except (OSError, json.JSONDecodeError) as error:
+        errors.append(f"skills.sh.json: {error}")
     errors.extend(discovery_errors(list(names)))
     for error in errors:
         print(error, file=sys.stderr)

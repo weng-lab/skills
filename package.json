@@ -1,5 +1,12 @@
 {
   "dependencies": {
-    "skills": "^1.5.14"
+    "skills": "1.5.26"
+  },
+  "private": true,
+  "scripts": {
+    "validate": "python3 -m unittest discover -s scripts -p \"test_*.py\" && uv run scripts/validate-skills.py"
+  },
+  "engines": {
+    "node": ">=22.20.0"
   }
 }
