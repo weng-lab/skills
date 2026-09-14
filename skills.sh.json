@@ -10,6 +10,13 @@
       ]
     },
     {
+      "title": "Writing",
+      "description": "Skills for writing and revising clear prose.",
+      "skills": [
+        "unslop"
+      ]
+    },
+    {
       "title": "Web Development",
       "description": "Skills for building, reviewing, and improving web applications and user interfaces.",
       "skills": [
